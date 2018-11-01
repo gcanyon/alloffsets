@@ -1,6 +1,7 @@
 script "OffsetList"
-function offsetList D,S
+function offsetList D,S,pCase
    -- returns a comma-delimited list of the offsets of D in S
+   set the caseSensitive to pCase is true
    set the itemDel to D
    put length(D) into dLength
    put 1 - dLength into C
