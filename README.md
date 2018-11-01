@@ -1,1 +1,1 @@
-offsetlist
+Offsetlist is a LiveCode function that returns a comma-delimited list of all the offsets of a character in a string. It does this by setting the item delimiter and parsing the items of the string, instead of using the more obvious offset function with the characters-to-skip parameter. As a result it is about 30% faster for simple strings (strings without multi-byte characters) and substantially to extremely (hundreds of times) faster for strings that include multibyte characters -- in testing on a 50,000-character string, it was 300x faster.
