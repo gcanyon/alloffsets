@@ -1,5 +1,5 @@
-script "OffsetList"
-function offsetList D,S,pCase
+script "allOffsets"
+function allOffsets D,S,pCase
    -- returns a comma-delimited list of the offsets of D in S
    set the caseSensitive to pCase is true
    set the itemDel to D
@@ -15,4 +15,4 @@ function offsetList D,S,pCase
    put length(R) into lenR
    if lenC = lenR then return 0
    return char 1 to lenR - lenC - 1 of R
-end offsetList
+end allOffsets
