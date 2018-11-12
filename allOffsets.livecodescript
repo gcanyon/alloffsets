@@ -36,3 +36,27 @@ function allOffsets D,S,pCase,pNoOverlaps
    if R begins with C then return 0 
    return char 1 to -3 - length(C) of R
 end allOffsets
+
+function allOffsetsUTF32 pFind,pString,pCaseSensitive,pNoOverlaps
+   -- returns a comma-delimited list of the offsets of pFind in pString
+   -- note, this seems to fail on some searches, for example:
+   -- searching for "Reykjavík" in "Reykjavík er höfuðborg"
+   -- It is uncertain why. 
+   -- See thread here: http://lists.runrev.com/pipermail/use-livecode/2018-November/251357.html
+   local tNewPos, tPos, tResult, tSkip
+   put textEncode(pFind,"UTF-32") into pFind
+   put textEncode(pString,"UTF-32") into pString
+   if pNoOverlaps then put length(pFind) - 1 into tSkip
+   
+   set the caseSensitive to pCaseSensitive is true
+   put 0 into tPos
+   repeat forever
+      put offset(pFind, pString, tPos) into tNewPos
+      if tNewPos = 0 then exit repeat
+      add tNewPos to tPos
+      if tPos mod 4 = 1 then put (tPos div 4 + 1),"" after tResult
+      if pNoOverlaps then add tSkip to tPos
+   end repeat
+   if tResult is empty then return 0
+   else return char 1 to -2 of tResult
+end allOffsetsUTF32
