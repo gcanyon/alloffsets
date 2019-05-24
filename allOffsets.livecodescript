@@ -34,12 +34,12 @@ function allOffsetsItems D,S,pCase,pNoOverlaps
          add length(i) + dLength to C
          put C,"" after R
       end repeat
+      set the itemDel to comma
+      repeat with i = 1 to dLength
+         if item i of R > 0 then exit repeat
+      end repeat
+      delete item 1 to i - 1 of R
    end if
-   set the itemDel to comma
-   repeat with i = 1 to 99999999999
-      if item i of R > 0 then exit repeat
-   end repeat
-   delete item 1 to i - 1 of R
    if R begins with C then return 0 
    return char 1 to -3 - length(C) of R
 end allOffsetsItems
